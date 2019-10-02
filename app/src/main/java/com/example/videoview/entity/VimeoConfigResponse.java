@@ -7,6 +7,9 @@ public class VimeoConfigResponse{
 	@SerializedName("request")
 	private Request request;
 
+	@SerializedName("video")
+	private Video video;
+
 	public void setRequest(Request request){
 		this.request = request;
 	}
@@ -15,11 +18,16 @@ public class VimeoConfigResponse{
 		return request;
 	}
 
+	public Video getVideo(){
+		return video;
+	}
+
 	@Override
  	public String toString(){
 		return 
-			"VimeoConfigResponse{" + 
-			"request = '" + request + '\'' + 
+			"Video{" +
+			"request = '" + request + '\'' +
+			", video = '" + video + '\'' +
 			"}";
 		}
 }

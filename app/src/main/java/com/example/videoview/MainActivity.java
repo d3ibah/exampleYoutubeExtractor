@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.videoview.entity.ProgressiveItem;
 import com.example.videoview.entity.VimeoConfigResponse;
 import com.example.videoview.internet.RestService;
 import com.example.videoview.internet.VimeoConfApi;
@@ -213,18 +214,26 @@ public class MainActivity extends AppCompatActivity {
         try {
             if (response.body() != null) {
                 Gson gson = new GsonBuilder().create();
-                VimeoConfigResponse luckyPlace = gson.fromJson(response.body().string(),
-                                                               //LuckyPlace luckyPlace = GsonHolder.getGson().fromJson(response.body().string(),
+                VimeoConfigResponse vimeoConfigResponse = gson.fromJson(response.body().string(),
                                                                VimeoConfigResponse.class);
                 Log.e("ResponseData body",
-                      "Get token response from JSON successfully: " + luckyPlace.toString());
+                      "Get token response from JSON successfully: " + vimeoConfigResponse.toString());
 
-                //textView.setText(luckyPlace.getResponse().getHeaderLocation());
+                startVimeoVideo(vimeoConfigResponse);
             } else {
                 Log.e("ResponseData NULL","Token response body is null");
             }
         } catch (IOException e) {
             Log.e("Exception","Can't get token from response " + e.getLocalizedMessage());
+        }
+    }
+
+    private void startVimeoVideo(VimeoConfigResponse vimeoConfigResponse) {
+        for (ProgressiveItem progressiveItem : vimeoConfigResponse.getRequest().getFiles().getProgressive()){
+            if (progressiveItem.getQuality().equals("720p")){
+                playFromUrl(progressiveItem.getUrl(), "Vimeo video");
+                tvTitle.setText(vimeoConfigResponse.getVideo().getTitle());
+            }
         }
     }
 }
