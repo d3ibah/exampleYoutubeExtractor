@@ -3,6 +3,7 @@ package com.example.videoview;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.videoview.entity.VimeoConfigResponse;
+import com.example.videoview.internet.RestService;
+import com.example.videoview.internet.VimeoConfApi;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
@@ -18,9 +22,18 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.videoview.Consts.VIDEO_TITLE;
 import static com.example.videoview.Consts.VIDEO_URL;
@@ -41,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etUrlLine;
     private TextView tvTitle;
     private Button btnPlayVideo;
-    //private Button btnRetry;
+    private Button btnVimeoConfRequest;
     private Button btnYoutubeWithTimeUrl;
     private Button btnYoutubeShortUrl;
     private Button btnYoutubeEmbedUrl;
@@ -49,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnVimeoUrl;
     private Button btnMp4Url;
     private ProgressBar mainProgressBar;
+
+    private VimeoConfApi vimeoConfApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         etUrlLine = findViewById(R.id.et_url_line);
         tvTitle = findViewById(R.id.tv_video_title);
         btnPlayVideo = findViewById(R.id.btn_choose_video_quality);
-        //btnRetry = findViewById(R.id.btn_retry);
+        btnVimeoConfRequest = findViewById(R.id.btn_retry);
         btnYoutubeWithTimeUrl = findViewById(R.id.btn_youtube_with_time);
         btnYoutubeShortUrl = findViewById(R.id.btn_youtube_short);
         btnYoutubeEmbedUrl = findViewById(R.id.btn_youtube_embed);
@@ -67,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         btnVimeoUrl = findViewById(R.id.btn_vimeo);
         btnMp4Url = findViewById(R.id.btn_mp4);
         mainProgressBar = findViewById(R.id.prgrBar);
+
+        vimeoConfApi = RestService.getInstance().getVimeoConfApi();
     }
 
     @Override
@@ -151,6 +168,24 @@ public class MainActivity extends AppCompatActivity {
         });
         //btnVimeoUrl.setOnClickListener(new );
         //btnMp4Url.setOnClickListener(new);
+        btnVimeoConfRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Call<ResponseBody> call = vimeoConfApi.getDirectUrls(127472766);
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Log.e("1111111", "ResposeBody: " + response.body().toString());
+                        handleTokenResponse(response);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.e("1111111", "ResposeBody Error: " + t.toString());
+                    }
+                });
+            }
+        });
     }
 
     private void addVideoUrl(String videoUrl) {
@@ -172,5 +207,24 @@ public class MainActivity extends AppCompatActivity {
         // Prepare the player with the source.
         player.prepare(videoSource);
         player.setPlayWhenReady(true);
+    }
+
+    private void handleTokenResponse(Response<ResponseBody> response) {
+        try {
+            if (response.body() != null) {
+                Gson gson = new GsonBuilder().create();
+                VimeoConfigResponse luckyPlace = gson.fromJson(response.body().string(),
+                                                               //LuckyPlace luckyPlace = GsonHolder.getGson().fromJson(response.body().string(),
+                                                               VimeoConfigResponse.class);
+                Log.e("ResponseData body",
+                      "Get token response from JSON successfully: " + luckyPlace.toString());
+
+                //textView.setText(luckyPlace.getResponse().getHeaderLocation());
+            } else {
+                Log.e("ResponseData NULL","Token response body is null");
+            }
+        } catch (IOException e) {
+            Log.e("Exception","Can't get token from response " + e.getLocalizedMessage());
+        }
     }
 }
