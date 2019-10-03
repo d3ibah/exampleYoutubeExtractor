@@ -11,10 +11,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.videoview.entity.ProgressiveItem;
-import com.example.videoview.entity.VimeoConfigResponse;
+import com.example.videoview.entity.vimeo.ProgressiveItem;
+import com.example.videoview.entity.vimeo.VimeoConfigResponse;
 import com.example.videoview.internet.RestService;
 import com.example.videoview.internet.VimeoConfApi;
+import com.example.videoview.json.JsonHelper;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
@@ -30,7 +31,6 @@ import java.io.IOException;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -118,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
              Toast.makeText(this, "Please try choosing a video again or checking video url.", Toast.LENGTH_LONG).show();
              setVisible(mainProgressBar, false);
          }
+
+         Log.e("111111", "Video From JSON: " + JsonHelper.importFromJSON(getApplicationContext()));
     }
 
     private void setClickListeners() {

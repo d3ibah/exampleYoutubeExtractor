@@ -1,4 +1,4 @@
-package com.example.videoview.entity;
+package com.example.videoview.entity.vimeo;
 
 import com.google.gson.annotations.SerializedName;
 

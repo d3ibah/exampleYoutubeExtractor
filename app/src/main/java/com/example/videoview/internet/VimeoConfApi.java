@@ -1,7 +1,5 @@
 package com.example.videoview.internet;
 
-import com.example.videoview.entity.VimeoConfigResponse;
-
 import androidx.annotation.NonNull;
 import okhttp3.ResponseBody;
 import retrofit2.Call;

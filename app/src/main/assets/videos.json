@@ -1,0 +1,28 @@
+{
+  "videos": {
+    "youtube": [
+      {
+        "url": "https://youtu.be/C23fO5mjRNA"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=trVk_1Fn3fA"
+      }
+    ],
+    "vimeo": [
+      {
+        "url": "https://vimeo.com/2936454"
+      },
+      {
+        "url": "https://vimeo.com/77485589"
+      }
+    ],
+    "direct": [
+      {
+        "url": "https://d2v9y0dukr6mq2.cloudfront.net/video/preview/GTYSdDW/panoramic-view-of-cola-or-soda-in-the-glass-french-fries-potato-and-hamburger-sandwich-on-tray-on-table_enuxnii0l__PM.mp4"
+      },
+      {
+        "url": "https://d2v9y0dukr6mq2.cloudfront.net/video/preview/GTYSdDW/panoramic-view-of-cola-or-soda-in-the-glass-french-fries-potato-and-hamburger-sandwich-on-tray-on-table_enuxnii0l__PM.mp4"
+      }
+    ]
+  }
+}
