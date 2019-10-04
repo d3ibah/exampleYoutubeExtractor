@@ -1,62 +1,39 @@
 package com.example.videoview.entity.videos;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
-
 public class Videos{
+	private Youtube youtube;
+	private Vimeo vimeo;
+	private Direct direct;
 
-	//@SerializedName("videos")
-	//private Videos videos;
-
-	@SerializedName("youtube")
-	private List<YoutubeItem> youtube;
-
-	@SerializedName("vimeo")
-	private List<VimeoItem> vimeo;
-
-	@SerializedName("direct")
-	private List<DirectItem> direct;
-
-	//public void setVideos(Videos videos){
-	//	this.videos = videos;
-	//}
-	//
-	//public Videos getVideos(){
-	//	return videos;
-	//}
-
-	public void setYoutube(List<YoutubeItem> youtube){
+	public void setYoutube(Youtube youtube) {
 		this.youtube = youtube;
 	}
 
-	public List<YoutubeItem> getYoutube(){
+	public Youtube getYoutube() {
 		return youtube;
 	}
 
-	public void setVimeo(List<VimeoItem> vimeo){
+	public void setVimeo(Vimeo vimeo) {
 		this.vimeo = vimeo;
 	}
 
-	public List<VimeoItem> getVimeo(){
+	public Vimeo getVimeo() {
 		return vimeo;
 	}
 
-	public void setDirect(List<DirectItem> direct){
+	public void setDirect(Direct direct) {
 		this.direct = direct;
 	}
 
-	public List<DirectItem> getDirect(){
+	public Direct getDirect() {
 		return direct;
 	}
 
 	@Override
  	public String toString(){
-		return 
-			"Videos{" +
-			",youtube = '" + youtube + '\'' + 
-			",vimeo = '" + vimeo + '\'' + 
-			",direct = '" + direct + '\'' + 
-			"}";
+		return "Videos{" + "youtube = '" + youtube + '\'' +
+			   ",vimeo = '" + vimeo + '\'' +
+			   ",direct = '" + direct + '\'' +
+			   "}";
 		}
 }
