@@ -11,10 +11,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.videoview.db.DataBase;
 import com.example.videoview.entity.vimeo.ProgressiveItem;
 import com.example.videoview.entity.vimeo.VimeoConfigResponse;
 import com.example.videoview.internet.RestService;
 import com.example.videoview.internet.VimeoConfApi;
+import com.example.videoview.json.JsonHelper;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
@@ -65,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
     private VimeoConfApi vimeoConfApi;
 
+    private DataBase dataBase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
         btnMp4Url = findViewById(R.id.btn_mp4);
         mainProgressBar = findViewById(R.id.prgrBar);
 
+        //dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, "videos").allowMainThreadQueries().build();
+        dataBase = App.getInstance()
+                      .getDatabase();
         vimeoConfApi = RestService.getInstance().getVimeoConfApi();
     }
 
@@ -117,6 +124,14 @@ public class MainActivity extends AppCompatActivity {
              Toast.makeText(this, "Please try choosing a video again or checking video url.", Toast.LENGTH_LONG).show();
              setVisible(mainProgressBar, false);
          }
+
+        //dataBase.getVideosDao().addVideo(Consts.convertVideosToVideosDb(JsonHelper.importFromJSON(this)));
+
+        //for (VideosDb videosDb : Consts.convertVideosToVideosDb(JsonHelper.importFromJSON(this))){
+        //    dataBase.getVideosDao().addVideo(videosDb);
+        //}
+        dataBase.getVideosDao()
+                .addVideo(Consts.convertVideosToVideosDb(JsonHelper.importFromJSON(this)));
     }
 
     private void setClickListeners() {
@@ -199,12 +214,6 @@ public class MainActivity extends AppCompatActivity {
         String userAgent = Util.getUserAgent(this, this.getString(R.string.app_name));
         MediaSource videoSource = new ProgressiveMediaSource.Factory(new DefaultDataSourceFactory(this, userAgent))
                 .createMediaSource(mp4VideoUri);
-
-        //DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, Util.getUserAgent(this, getString(
-        //        R.string.app_name)));
-        //MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(mp4VideoUri);
-
-        // Prepare the player with the source.
         player.prepare(videoSource);
         player.setPlayWhenReady(true);
     }

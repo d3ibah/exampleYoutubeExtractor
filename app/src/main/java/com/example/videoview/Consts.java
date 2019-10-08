@@ -1,5 +1,11 @@
 package com.example.videoview;
 
+import com.example.videoview.db.VideosDb;
+import com.example.videoview.entity.videos.Videos;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Consts {
 
     protected static final String YOUTUBE_WITH_TIME_URL = "https://www.youtube.com/watch?v=wIjB8jTDOZU&t=14s";
@@ -15,4 +21,43 @@ public class Consts {
     protected static final String YOUTUBE_URL = "YOUTUBE_URL";
     protected static final String VIDEO_URL = "VIDEO_URL";
     protected static final String VIDEO_TITLE = "VIDEO_TITLE";
+
+    //public static VideosDb convertVideosToVideosDb(Videos videos) {
+    //    YoutubeDb youtubeDb = new YoutubeDb(videos.getYoutube()
+    //                                              .getUrl());
+    //    VimeoDb vimeoDb = new VimeoDb(videos.getVimeo()
+    //                                        .getUrl());
+    //    DirectDb directDb = new DirectDb(videos.getDirect()
+    //                                           .getUrl());
+    //
+    //    return new VideosDb(youtubeDb, vimeoDb, directDb);
+    //}
+    public static List<VideosDb> convertVideosToVideosDb(Videos videos) {
+        List<VideosDb> videosDbList = new ArrayList<>();
+        for (int i = 0; i < videos.getYoutube()
+                                  .getUrl()
+                                  .size(); i++) {
+            VideosDb videosDb = new VideosDb("youtube", videos.getYoutube()
+                                                              .getUrl()
+                                                              .get(i));
+            videosDbList.add(videosDb);
+        }
+        for (int i = 0; i < videos.getYoutube()
+                                  .getUrl()
+                                  .size(); i++) {
+            VideosDb videosDb = new VideosDb("vimeo", videos.getVimeo()
+                                                            .getUrl()
+                                                            .get(i));
+            videosDbList.add(videosDb);
+        }
+        for (int i = 0; i < videos.getYoutube()
+                                  .getUrl()
+                                  .size(); i++) {
+            VideosDb videosDb = new VideosDb("direct", videos.getDirect()
+                                                             .getUrl()
+                                                             .get(i));
+            videosDbList.add(videosDb);
+        }
+        return videosDbList;
+    }
 }
