@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnYoutubeEmbedUrl;
     private Button btnYoutubeWatchUrl;
     private Button btnVimeoUrl;
-    private Button btnMp4Url;
+    private Button btnSaveLinksToDB;
     private ProgressBar mainProgressBar;
 
     private VimeoConfApi vimeoConfApi;
@@ -84,10 +84,9 @@ public class MainActivity extends AppCompatActivity {
         btnYoutubeEmbedUrl = findViewById(R.id.btn_youtube_embed);
         btnYoutubeWatchUrl = findViewById(R.id.btn_youtube_watch);
         btnVimeoUrl = findViewById(R.id.btn_vimeo);
-        btnMp4Url = findViewById(R.id.btn_mp4);
+        btnSaveLinksToDB = findViewById(R.id.btn_save_to_db);
         mainProgressBar = findViewById(R.id.prgrBar);
 
-        //dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, "videos").allowMainThreadQueries().build();
         dataBase = App.getInstance()
                       .getDatabase();
         vimeoConfApi = RestService.getInstance().getVimeoConfApi();
@@ -124,14 +123,6 @@ public class MainActivity extends AppCompatActivity {
              Toast.makeText(this, "Please try choosing a video again or checking video url.", Toast.LENGTH_LONG).show();
              setVisible(mainProgressBar, false);
          }
-
-        //dataBase.getVideosDao().addVideo(Consts.convertVideosToVideosDb(JsonHelper.importFromJSON(this)));
-
-        //for (VideosDb videosDb : Consts.convertVideosToVideosDb(JsonHelper.importFromJSON(this))){
-        //    dataBase.getVideosDao().addVideo(videosDb);
-        //}
-        dataBase.getVideosDao()
-                .addVideo(Consts.convertVideosToVideosDb(JsonHelper.importFromJSON(this)));
     }
 
     private void setClickListeners() {
@@ -182,7 +173,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //btnVimeoUrl.setOnClickListener(new );
-        //btnMp4Url.setOnClickListener(new);
+        btnSaveLinksToDB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataBase.getVideosDao()
+                        .addVideo(Consts.convertVideosToVideosDb(JsonHelper.importFromJSON(MainActivity.this)));
+            }
+        });
         btnVimeoConfRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -99,15 +99,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="vimeo"
-        app:layout_constraintEnd_toStartOf="@+id/btn_mp4"
+        app:layout_constraintEnd_toStartOf="@+id/btn_save_to_db"
         app:layout_constraintStart_toEndOf="@+id/btn_youtube_watch"
         app:layout_constraintTop_toTopOf="@+id/btn_youtube_watch" />
 
     <Button
-        android:id="@+id/btn_mp4"
+        android:id="@+id/btn_save_to_db"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="mp4"
+        android:text="Save links to DB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_vimeo"
         app:layout_constraintTop_toTopOf="@+id/btn_youtube_watch" />
