@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.videoview.entity.quality.VideoWithQuality;
+import com.example.videoview.db.VideosDb;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
 
@@ -16,8 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.VideoListViewHolder> {
 
-    private List<VideoWithQuality> videoWithQualityList;
+    private List<VideosDb> videoWithQualityList;
+    //private List<VideoWithQuality> videoWithQualityList;
     private RecyclerClickListener recyclerClickListener;
+
+    public VideoListAdapter(List<VideosDb> videoWithQualityList) {
+        this.videoWithQualityList = videoWithQualityList;
+    }
 
     @NonNull
     @Override
@@ -29,7 +34,10 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Vide
 
     @Override
     public void onBindViewHolder(@NonNull VideoListViewHolder holder, int position) {
-        VideoWithQuality videosDb = videoWithQualityList.get(position);
+        VideosDb videosDb = videoWithQualityList.get(position);
+        //VideoWithQuality videosDb = videoWithQualityList.get(position);
+
+        holder.tvItemTitle.setText(videosDb.getUrl());
     }
 
     @Override

@@ -12,14 +12,38 @@ import androidx.room.TypeConverters;
 public class VideosDb {
 
     @PrimaryKey(autoGenerate = true)
-    int uid;
+    private int uid;
 
     @TypeConverters(VideoTypeConverter.class)
-    VideoType type;
-    String url;
+    private VideoType type;
+    private String url;
 
     public VideosDb(VideoType type, String url) {
         this.type = type;
         this.url = url;
+    }
+
+    public VideoType getType() {
+        return type;
+    }
+
+    public void setType(VideoType type) {
+        this.type = type;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 }

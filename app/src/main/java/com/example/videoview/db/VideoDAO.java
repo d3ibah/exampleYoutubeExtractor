@@ -25,5 +25,5 @@ public interface VideoDAO {
     void deleteAllVideo(VideosDb videosDb);
 
     @Query("SELECT * FROM videos")
-    VideosDb getVideo();
+    List<VideosDb> getVideo();
 }
