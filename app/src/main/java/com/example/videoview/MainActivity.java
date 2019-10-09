@@ -39,10 +39,7 @@ import retrofit2.Response;
 
 import static com.example.videoview.Consts.VIDEO_TITLE;
 import static com.example.videoview.Consts.VIDEO_URL;
-import static com.example.videoview.Consts.YOUTUBE_EMBED_URL;
-import static com.example.videoview.Consts.YOUTUBE_SHORT_URL;
 import static com.example.videoview.Consts.YOUTUBE_URL;
-import static com.example.videoview.Consts.YOUTUBE_WATCH_URL;
 import static com.example.videoview.Consts.YOUTUBE_WITH_TIME_URL;
 
 public class MainActivity extends AppCompatActivity {
@@ -58,9 +55,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btnPlayVideo;
     private Button btnVimeoConfRequest;
     private Button btnYoutubeWithTimeUrl;
-    private Button btnYoutubeShortUrl;
-    private Button btnYoutubeEmbedUrl;
-    private Button btnYoutubeWatchUrl;
     private Button btnVimeoUrl;
     private Button btnSaveLinksToDB;
     private ProgressBar mainProgressBar;
@@ -80,9 +74,6 @@ public class MainActivity extends AppCompatActivity {
         btnPlayVideo = findViewById(R.id.btn_choose_video_quality);
         btnVimeoConfRequest = findViewById(R.id.btn_retry);
         btnYoutubeWithTimeUrl = findViewById(R.id.btn_youtube_with_time);
-        btnYoutubeShortUrl = findViewById(R.id.btn_youtube_short);
-        btnYoutubeEmbedUrl = findViewById(R.id.btn_youtube_embed);
-        btnYoutubeWatchUrl = findViewById(R.id.btn_youtube_watch);
         btnVimeoUrl = findViewById(R.id.btn_vimeo);
         btnSaveLinksToDB = findViewById(R.id.btn_save_to_db);
         mainProgressBar = findViewById(R.id.prgrBar);
@@ -152,24 +143,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addVideoUrl(YOUTUBE_WITH_TIME_URL);
-            }
-        });
-        btnYoutubeShortUrl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addVideoUrl(YOUTUBE_SHORT_URL);
-            }
-        });
-        btnYoutubeEmbedUrl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addVideoUrl(YOUTUBE_EMBED_URL);
-            }
-        });
-        btnYoutubeWatchUrl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addVideoUrl(YOUTUBE_WATCH_URL);
             }
         });
         btnVimeoUrl.setOnClickListener(new View.OnClickListener() {
