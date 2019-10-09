@@ -172,7 +172,13 @@ public class MainActivity extends AppCompatActivity {
                 addVideoUrl(YOUTUBE_WATCH_URL);
             }
         });
-        //btnVimeoUrl.setOnClickListener(new );
+        btnVimeoUrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
+                startActivity(intent);
+            }
+        });
         btnSaveLinksToDB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
