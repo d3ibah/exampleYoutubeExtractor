@@ -1,5 +1,7 @@
 package com.example.videoview.db;
 
+import com.example.videoview.entity.quality.VideoWithQuality;
+
 import java.util.List;
 
 import androidx.room.Dao;
@@ -26,4 +28,14 @@ public interface VideoDAO {
 
     @Query("SELECT * FROM videos")
     List<VideosDb> getVideo();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void addVideoWithQuality(List<VideoWithQuality> videoWithQualities);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void addVideoWithQuality(VideoWithQuality videoWithQualities);
+
+    @Query("SELECT * FROM quality")
+    List<VideoWithQuality> getVideoWithQuality();
+
 }

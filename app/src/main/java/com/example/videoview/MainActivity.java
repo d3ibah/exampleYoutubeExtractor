@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         btnVimeoConfRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<ResponseBody> call = vimeoConfApi.getDirectUrls(127472766);
+                Call<ResponseBody> call = vimeoConfApi.getDirectUrls("127472766");
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

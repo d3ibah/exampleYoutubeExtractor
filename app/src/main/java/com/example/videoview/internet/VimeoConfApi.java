@@ -11,5 +11,5 @@ public interface VimeoConfApi {
     //    @GET("/api/aircrafts/{id}")
     //    Single<Aircraft> getAircraft(@Path("id") @NonNull int aircraftId);
     @GET("{id}/config")
-    Call<ResponseBody> getDirectUrls(@Path("id") @NonNull int videoId);
+    Call<ResponseBody> getDirectUrls(@Path("id") @NonNull String videoId);
 }
