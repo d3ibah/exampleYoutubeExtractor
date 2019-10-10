@@ -40,7 +40,7 @@ public class SecondActivity extends AppCompatActivity {
         }
     }
 
-    private void getYoutubeDownloadUrl(String directUrl) {
+    private void getYoutubeDownloadUrl(String videoPageUrl) {
         new YouTubeExtractor(this) {
 
             @Override
@@ -68,7 +68,7 @@ public class SecondActivity extends AppCompatActivity {
                 }
                 mainLayout.setVisibility(View.VISIBLE);
             }
-        }.extract(directUrl, true, false);
+        }.extract(videoPageUrl, true, false);
     }
 
     private void addButtonToMainLayout(final String videoTitle, final YtFile ytfile) {

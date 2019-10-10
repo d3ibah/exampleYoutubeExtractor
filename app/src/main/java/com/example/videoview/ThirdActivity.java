@@ -79,11 +79,19 @@ public class ThirdActivity extends AppCompatActivity {
             }
 
             if (videosDb.getType() == VideoType.YOUTUBE) {
-
+                saveYoutubeDirectUrls(videosDb);
             }
         }
         dataBase.getVideosDao()
                 .addVideoWithQuality(videoWithQualityList);
+    }
+
+    private void saveYoutubeDirectUrls(VideosDb videosDb) {
+        YoutubeDirectLinkExtractor youtubeDirectLinkExtractor = new YoutubeDirectLinkExtractor(videosDb.getUid(),
+                                                                                               videosDb.getUrl());
+        VideoWithQuality videoWithQuality = youtubeDirectLinkExtractor.getVideoWithQuality();
+        dataBase.getVideosDao()
+                .addVideoWithQuality(videoWithQuality);
     }
 
     private String getVideoId(String url) {
@@ -137,23 +145,4 @@ public class ThirdActivity extends AppCompatActivity {
                 .addVideoWithQuality(new VideoWithQuality(idVirginLink, vimeoConfigResponse.getVideo()
                                                                                            .getTitle(), qualityList));
     }
-
-    //private void startVimeoVideo(VimeoConfigResponse vimeoConfigResponse) {
-    //    for (ProgressiveItem progressiveItem : vimeoConfigResponse.getRequest().getFiles().getProgressive()){
-    //        if (progressiveItem.getQuality().equals("720p")){
-    //            playFromUrl(progressiveItem.getUrl(), "Vimeo video");
-    //            //tvTitle.setText(vimeoConfigResponse.getVideo().getTitle());
-    //        }
-    //    }
-    //}
-    //
-    //private void playFromUrl(String youtubeDlUrl, String downloadTitle) {
-    //    //tvTitle.setText(downloadTitle);
-    //    //Uri mp4VideoUri = Uri.parse(youtubeDlUrl);
-    //    //String userAgent = Util.getUserAgent(this, this.getString(R.string.app_name));
-    //    //MediaSource videoSource = new ProgressiveMediaSource.Factory(new DefaultDataSourceFactory(this, userAgent))
-    //    //        .createMediaSource(mp4VideoUri);
-    //    //player.prepare(videoSource);
-    //    //player.setPlayWhenReady(true);
-    //}
 }

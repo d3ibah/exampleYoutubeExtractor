@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText etUrlLine;
     private TextView tvTitle;
-    private Button btnPlayVideo;
+    private Button btnChooseQualityVideo;
     private Button btnVimeoConfRequest;
     private Button btnYoutubeWithTimeUrl;
     private Button btnVimeoUrl;
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         playerView = findViewById(R.id.player_view);
         etUrlLine = findViewById(R.id.et_url_line);
         tvTitle = findViewById(R.id.tv_video_title);
-        btnPlayVideo = findViewById(R.id.btn_choose_video_quality);
+        btnChooseQualityVideo = findViewById(R.id.btn_choose_video_quality);
         btnVimeoConfRequest = findViewById(R.id.btn_retry);
         btnYoutubeWithTimeUrl = findViewById(R.id.btn_youtube_with_time);
         btnVimeoUrl = findViewById(R.id.btn_vimeo);
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setClickListeners() {
         setButtons();
-        btnPlayVideo.setOnClickListener(new View.OnClickListener() {
+        btnChooseQualityVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setVisible(mainProgressBar, true);
